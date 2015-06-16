@@ -1,71 +1,34 @@
-var diner = require('./include/diner')
-var meal = require('./include/meal')
-var bill = require('./include/bill')
+var Dish = require('./include/dish.js').Dish
+var Diner = require('./include/diner.js').Diner
+var Meal = require('./include/meal.js').Meal
+
+var dish1 = new Dish('bacon', 10);
+var dish2 = new Dish('french fries', 8);
+var dish3 = new Dish('ice cream', 5);
+var dish4 = new Dish('ravioli', 12);
+var dish5 = new Dish('hamburguer', 11);
+var dish6 = new Dish('chocolate brownie', 6);
+
+var diner1 = new Diner('Valeria');
+var diner2 = new Diner('Agustin');
+var diner3 = new Diner('Mariano');
+diner1.addDish(dish1);
+diner1.addDish(dish2);
+diner2.addDish(dish3);
+diner2.addDish(dish4);
+diner3.addDish(dish5);
+diner3.addDish(dish6);
 
 
-var luis = Object.create(diner, {
-  name: {
-    value: 'Luis'
-  }, meal: {
-    value: {
-      'burger': 8,
-      'fries': 3,
-      'soda': 2
-    }
-  }
-})
+var meal1 = new Meal('Farewell meal');
 
-var john = Object.create(diner, {
-  name: {
-    value: 'John'
-  }, meal: {
-    value: {
-      'nachos': 8,
-      'pop': 2
-    }
-  }
-})
+meal1.addDiner(diner1);
+meal1.addDiner(diner2);
+meal1.addDiner(diner3);
 
-var pete = Object.create(diner, {
-  name: {
-    value: 'Peter'
-  }, meal: {
-    value: {
-      'burrito': 7,
-      'water': 2
-    }
-  }
-})
+meal1.tax = 11;
+meal1.tip = 15;
 
-var bill = function(){
-  var tax = 0.09
-  var tipPercentage = .18
-  var total = 0
-  var tip = 0
-  var totalDiners = arguments.length
-
-  for(var i=0; i<totalDiners; i++) {
-    var diner = arguments[i]
-    for (var item in diner.meal) {
-      diner.total += diner.meal[item]
-    }
-    total += diner.total
-  }
-
-  tipPerDiner = (Math.ceil(total * tipPercentage) / totalDiners)
-  console.log("The total per diner is:")
-  for(var i=0; i<totalDiners; i++) {
-    var _diner = arguments[i]
-    var taxDue = (_diner.total * tax)
-    var totalDue = (tipPerDiner + _diner.total) + taxDue
-    console.log(_diner.name +
-                ': [ subtotal: ' + _diner.total +
-                ' tax: '+  taxDue.toFixed(2) +
-                ' tip: ' + tipPerDiner +' ]' +
-                ' Total Due: ' + totalDue.toFixed(2)
-               )
-  }
-
-}
-
-bill(luis, john, pete)
+meal1.printBill()
+// What does this do??
+// meal1.printBill(true)
