@@ -31,4 +31,5 @@ meal1.tip = 15;
 
 meal1.printBill()
 // What does this do??
+// prints detail info per diner
 // meal1.printBill(true)
