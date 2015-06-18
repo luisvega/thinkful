@@ -179,7 +179,7 @@ ShoppingList.prototype.deleteItem = function(id) {
         dataType: 'json'
     });
     //this.getItems.bind(this);
-    ajax.done(this.getItems());
+    ajax.done(this.getItems.bind(this));
 
 };
 

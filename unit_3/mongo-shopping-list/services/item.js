@@ -33,11 +33,12 @@ exports.update = function(id, name, callback, errback) {
 };
 
 
-exports.delete = function(id, errback) {
-  Item.remove({ '_id': id }, function(err){
+exports.delete = function(id, callback, errback) {
+  Item.remove({ '_id': id }, function(err, removed){
     if (err) {
       errback(err);
       return;
     }
+    callback(removed);
   })
 };

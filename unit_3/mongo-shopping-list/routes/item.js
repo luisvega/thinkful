@@ -31,10 +31,12 @@ router.put('/items/:id', function(req, res){
 });
 
 
+// Need to talk about why this works and why it works
+
 router.delete('/items/:id', function(req, res){
   var id = req.params.id;
-  Item.delete(id, function(item) {
-    res.status(201).json(item);
+  Item.delete(id, function(removed) {
+    res.json(removed)
   }, function(err){
     res.status(404).json(err);
   });
