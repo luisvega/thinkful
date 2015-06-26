@@ -15,7 +15,6 @@ var app = server.app;
 
 chai.use(chaiHttp);
 
-var oid = ''
 
 describe('Shopping List', function() {
   before(function(done){
@@ -49,11 +48,14 @@ describe('Shopping List', function() {
           res.body.should.have.property('_id')
           oid = res.body._id
           res.body._id.should.be.a('string')
-          // why is this being set to two (2) when it should be four (4)
-          _items.list.length.should.equal(2)
           res.body.name.should.be.a('string')
           res.body.name.should.equal('Carrot')
-          done()
+          chai.request(app)
+            .get('/items')
+            .end(function(err, res){
+              res.body.should.have.length(4)
+              done()
+            })
         })
   })
 
@@ -61,21 +63,38 @@ describe('Shopping List', function() {
   it('should edit an item on put',
      function(done){
        chai.request(app)
-           .put('/items/' + oid)
-           .send({ 'name': 'Cambell Soup' })
-           .end(function(err, res) {
-              console.log(res.body)
-              res.should.have.status(201)
-              res.should.be.json
-              res.body.name.should.equal('Cambell Soup')
-              done()
-           })
-  });
+        .get('/items')
+        .end(function(err, res){
+          var oid = res.body[0]._id
+          chai.request(app)
+              .put('/items/' + oid)
+              .send({ name: 'Cambell Soup' })
+              .end(function(err, res) {
+                 res.should.have.status(201)
+                 res.should.be.json
+                 res.body.name.should.equal('Cambell Soup')
+                 done()
+              })
+        })
+  })
+  it('should delete an item on delete', function(done){
+    chai.request(app)
+      .get('/items')
+      .end(function(err, res){
+        var oid = res.body[3]._id
+        chai.request(app)
+          .delete('/items/' + oid)
+          .end(function(err, res) {
+            res.should.have.status(201)
+            res.should.be.json
+            done()
+          })
+      })
+  })
   after(function(done) {
     Item.remove(function() {
       done();
    });
   });
+
 });
-
-

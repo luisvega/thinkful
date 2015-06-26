@@ -23,7 +23,8 @@ exports.list = function(callback, errback) {
 
 
 exports.update = function(id, name, callback, errback) {
-  Item.findByIdAndUpdate(id, { $set : { name: name } }, function(err, item){
+  // required {new: true, upsert: true} for the mocha test
+  Item.findByIdAndUpdate(id, { $set : { name: name } }, {new: true, upsert: true}, function(err, item){
     if (err) {
       errback(err);
       return;
@@ -39,8 +40,6 @@ exports.delete = function(id, callback, errback) {
       errback(err);
       return;
     }
-    console.log(removed)
     callback(removed);
   })
 };
-

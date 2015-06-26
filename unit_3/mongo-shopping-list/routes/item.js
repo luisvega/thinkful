@@ -36,7 +36,7 @@ router.put('/items/:id', function(req, res){
 router.delete('/items/:id', function(req, res){
   var id = req.params.id;
   Item.delete(id, function(removed) {
-    res.json(removed)
+    res.status(201).json(removed)
   }, function(err){
     res.status(404).json(err);
   });
