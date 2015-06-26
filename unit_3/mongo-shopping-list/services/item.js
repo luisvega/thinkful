@@ -39,6 +39,8 @@ exports.delete = function(id, callback, errback) {
       errback(err);
       return;
     }
+    console.log(removed)
     callback(removed);
   })
 };
+

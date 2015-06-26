@@ -30,4 +30,4 @@ Meal.prototype.printBill = function (first_argument) {
 };
 
 
-exports.Meal = Meal
+module.exports = Meal

@@ -13,4 +13,4 @@ Diner.prototype.showDishes = function() {
   })
 }
 
-exports.Diner = Diner
+module.exports = Diner

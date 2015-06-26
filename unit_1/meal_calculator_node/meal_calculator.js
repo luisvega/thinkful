@@ -1,6 +1,6 @@
-var Dish = require('./include/dish.js').Dish
-var Diner = require('./include/diner.js').Diner
-var Meal = require('./include/meal.js').Meal
+var Dish = require('./include/dish.js')
+var Diner = require('./include/diner.js')
+var Meal = require('./include/meal.js')
 
 var dish1 = new Dish('bacon', 10);
 var dish2 = new Dish('french fries', 8);
