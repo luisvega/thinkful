@@ -31,8 +31,6 @@ router.put('/items/:id', function(req, res){
 });
 
 
-// Need to talk about why this works and why it works
-
 router.delete('/items/:id', function(req, res){
   var id = req.params.id;
   Item.delete(id, function(removed) {

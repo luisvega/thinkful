@@ -37,7 +37,8 @@ describe('Shopping List', function() {
           res.body[2].name.should.equal('Peppers')
           done()
     })
-  })
+  });
+
   it('should add an item on post', function(done){
     chai.request(app)
         .post('/items')
@@ -57,9 +58,8 @@ describe('Shopping List', function() {
               done()
             })
         })
-  })
+  });
 
-  // This fails to update correctly
   it('should edit an item on put',
      function(done){
        chai.request(app)
@@ -76,7 +76,22 @@ describe('Shopping List', function() {
                  done()
               })
         })
+  });
+
+  it('should create a new item when attempting to update an invalid record',
+  function(done){
+    chai.request(app)
+      .put('/items/558cd092520258bd4716aca7')
+      .send({ name: 'Cambell Soup' })
+      .end(function(err, res) {
+        res.should.have.status(201)
+        res.should.be.json
+        res.body.name.should.equal('Cambell Soup')
+        done()
+      })
+
   })
+
   it('should delete an item on delete', function(done){
     chai.request(app)
       .get('/items')
@@ -90,11 +105,24 @@ describe('Shopping List', function() {
             done()
           })
       })
+  });
+
+
+  it('should attempt to delete and item and fail', function(done){
+    chai.request(app)
+      .delete('/items/558ccff04a924657476877a')
+      .end(function(err, res){
+        res.should.have.status(404)
+        res.should.be.json
+        done()
+      })
   })
+
   after(function(done) {
     Item.remove(function() {
       done();
    });
   });
-
+  // add two more tests
+  //
 });
