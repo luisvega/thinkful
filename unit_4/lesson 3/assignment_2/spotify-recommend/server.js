@@ -49,9 +49,9 @@ app.get('/search/:name', function(req, res){
       res.sendStatus(404)
       return
     }
+
     var relatedArtists = getRelatedArtists(artist.id)
     relatedArtists.on('end', function(item){
-
       artist.related = item.artists
       var completed = 0
       var checkComplete = function() {
@@ -61,17 +61,14 @@ app.get('/search/:name', function(req, res){
       }
       artist.related.forEach(function(relatedArtist, index){
         relatedTracks = getTopTracks(relatedArtist.id, { country: 'US' })
-        console.log('index: '+index)
-        console.log('completed: '+completed)
         relatedTracks.on('end', function(item){
             artist.related[index].tracks = item.tracks
+            completed += 1
+            checkComplete()
         })
         relatedTracks.on('error', function(){
           res.sendStatus(404)
         })
-        completed += 1
-        //console.log(artist.related[3])
-        checkComplete()
       })
 
     })
