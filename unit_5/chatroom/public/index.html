@@ -1,11 +1,32 @@
 <!doctype html>
-<title>Chatroom</title>
-<meta charset="utf-8">
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chatroom</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/master.css">
+  </head>
+  <body>
+    <ul class="pages">
+      <li id="chatPage" class="chat page">
+        <div class="chat">
+          <h3 class="title">Chat away with a stranger</h3>
+          <input type="text">
+          <div id="messages" class="messages"></div>
+        </div>
+      </li>
+      <li id="loginPage" class="login page">
+        <div class="form">
+          <h3 class="title">What's your nickname?</h3>
+          <input class="username" type="text" maxlength="14" />
+        </div>
+      </li>
+    </ul>
+
+    <script src="//code.jquery.com/jquery-2.1.0.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
 
 <!-- JS -->
-<script src="//code.jquery.com/jquery-2.1.0.js"></script>
-<script src="/socket.io/socket.io.js"></script>
-<script src="main.js"></script>
-
-<input type="text">
-<div id="messages"></div>
