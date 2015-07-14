@@ -44,13 +44,33 @@ canvas {
 
 <div id="main">
     <h1>Pictionary</h1>
-    <div id="top-message">
-      <div id="guess" style="display: s">
-          Make a guess: <input type="text">
+
+    <div id="register">
+      You are a:
+      <select id="selector">
+        <option value="">Select</option>
+        <option value="drawer">Drawer</option>
+        <option value="guesser">Guesser</option>
+      </select>
+    </div>
+
+    <div id="guesser" style="display: none">
+      <div id="top-message">
+        <div id="guess">
+            Make a guess: <input type="text">
+        </div>
       </div>
     </div>
-    <canvas id="canvas"></canvas>
-    <div id="bottome-message">
-        <strong>Guess</strong>: <span id="guesses"></span>
+    <div id="wordToDraw" style="display: none">
+      Your word is <span id="theWord"></span>
     </div>
+    <canvas id="canvas" ></canvas>
+
+    <div id="guessOutput" style="display: none">
+      <div id="bottom-message">
+          <strong>Guess</strong>: <span id="guesses"></span>
+      </div>
+    </div>
+
+
 </div>
